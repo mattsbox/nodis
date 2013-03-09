@@ -1,0 +1,21 @@
+{
+  	"name": "tolife-sms",
+	"version":"0.0.1",
+  	"description": "SMS Response",
+  	"author": {
+    		"name": "Matt Craddock",
+    		"email": "mattsbox@zoho.com"
+  	},
+  	"contributors": [{
+      		"name": "Matt Craddock",
+      		"email": "mattsbox@zoho.com"
+    	}],
+  	"dependencies": {
+		"mongodb" : "1.1.11"
+ 	},
+  	"main": "getloud",
+  	"engines": {
+    		"node": "0.8.x",
+		"npm": "1.1.x"	
+  	}
+}
