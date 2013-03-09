@@ -1,0 +1,48 @@
+(function()
+{
+	function ytsearch()
+	{
+		$("#ytcontent").html("");
+		$.get("https://gdata.youtube.com/feeds/api/videos?q="+$("#ytinput").val(),parseyt,"xml");//+$("#ytinput").value,parseyt,"xml");
+	}
+	function parseyt(data)
+	{
+		var t=document.createElement("table");
+		t.style.width="100%";
+		var tr=document.createElement("tr");
+		var first=true;
+		$(data).find("entry").each(function()
+		{
+			var node=$(this);
+			if(node.find("category").text()=="Music"&&node.find("author name").text().indexOf("VEVO")==-1)
+			{
+				var td=document.createElement("td");
+				var thumb=document.createElement("img");
+				thumb.src=node.find("thumbnail").first().attr("url");
+				thumb.style.width="100%";
+				td.appendChild(thumb);
+				var url=node.find("id").text();
+				td.code=url.substring(url.lastIndexOf("/")+1);
+				td.onclick=function(e)
+				{
+					td.innerHTML="<iframe src=\"http://youtube.com/embed/"+td.code+"\"></iframe>";
+				};
+				td.innerHTML+=node.find("title").first().text();
+				tr.appendChild(td);
+				if(first){first=false;}
+				else
+				{
+					t.appendChild(tr);
+					tr=document.createElement("tr");
+					first=true;
+				}
+			}
+		});
+		if(!first){t.appendChild(tr);}
+		$("#ytcontent").append(t);
+	}
+	$(document).ready(function()
+	{
+		$("#ytinputb").click(ytsearch);
+	});
+})();

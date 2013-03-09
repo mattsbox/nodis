@@ -11,7 +11,8 @@
       		"email": "mattsbox@zoho.com"
     	}],
   	"dependencies": {
-		"mongodb" : "1.1.11"
+		"mongodb" : "1.1.11",
+		"mime" : "1.2.9"
  	},
   	"main": "getloud",
   	"engines": {
