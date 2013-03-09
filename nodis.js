@@ -2,7 +2,7 @@ var http=require("http");
 var fs=require("fs");
 var url=require("url");
 var mongo=require("mongodb");
-var mURI=process.env.MONGOLAB_URI||process.env.MONGOHQ_URL||"mongodb://localhost/mydb";
+var mURI=process.env.MONGOLAB_URI||process.env.MONGOHQ_URL||"mongodb://jimbo:slice@ds031587.mongolab.com:31587/nodis";
 var songtable;
 mongo.Db.connect(mURI,function(e,db)
 {
@@ -12,7 +12,7 @@ mongo.Db.connect(mURI,function(e,db)
 		{
 			if(c){songtable=c;}
 		});
-	}
+	}else{console.log(e);}
 });
 var server=http.createServer(function(req,res)
 {
@@ -35,11 +35,15 @@ function output(q,res)
 	if(!songtable){return false;}
 	if(q["lat"]&&q["lon"]&&q["rlt"]&&q["rln"])
 	{
+		var lt=parseFloat(q["lat"]);
+		var ln=parseFloat(q["lon"]);
+		var rt=parseFloat(q["rlt"]);
+		var rn=parseFloat(q["rln"]);
 		var data=songtable.find({	
-						"lat":{$lt:(q["lat"]+q["rlt"]),
-							$gt:(q["lat"]-q["rlt"])},
-						"lon":{	$lt:(q["lon"]+q["rln"]),
-							$gt:(q["lon"]-q["rln"])}
+						"lat":{$lt:(lt+rt),
+							$gt:(lt-rt)},
+						"lon":{	$lt:(ln+rn),
+							$gt:(ln-rn)}
 					},
 					{"limit":50,"sort":["_id","desc"]}
 					).toArray(function(e,a)
@@ -52,12 +56,16 @@ function output(q,res)
 								res.end(JSON.stringify(a));
 							}
 						});
+		console.log({"lat":{$lt:(lt+rt),
+							$gt:(lt-rt)},
+						"lon":{	$lt:(ln+rn),
+							$gt:(ln-rn)}});
 		return true;
 	}else{return false;}
 }
 function input(q,res)
 {
-	if(!songtable){return false;}
+	if(!songtable){console.log("DB");return false;}
 	if(q["lat"]&&q["lon"]&&q["sng"])
 	{
 		songtable.insert({	"lat":parseFloat(q["lat"]),
@@ -66,7 +74,7 @@ function input(q,res)
 				{safe:true},
 				function(e,rs)
 				{
-					if(e){condemn(500,res);}
+					if(e){console.log(e);condemn(500,res);}
 					else{approve(res);}
 				});
 		return true;
