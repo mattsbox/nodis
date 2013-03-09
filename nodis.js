@@ -16,6 +16,7 @@ mongo.Db.connect(mURI,function(e,db)
 });
 var server=http.createServer(function(req,res)
 {
+	console.log(req.headers);
 	var u=url.parse(req.url,true);
 	switch(u.pathname)
 	{
@@ -66,11 +67,11 @@ function output(q,res)
 function input(q,res)
 {
 	if(!songtable){console.log("DB");return false;}
-	if(q["lat"]&&q["lon"]&&q["sng"])
+	if(q["lat"]&&q["lon"]&&q["sid"])
 	{
 		songtable.insert({	"lat":parseFloat(q["lat"]),
 					"lon":parseFloat(q["lon"]),
-					"sng":q["sng"]},
+					"sid":q["sid"]},
 				{safe:true},
 				function(e,rs)
 				{
