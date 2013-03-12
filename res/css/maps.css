@@ -1,0 +1,14 @@
+.map_button
+{
+	height:20%;
+	width:100%;
+}
+.map_panel
+{
+	position:absolute;
+	display:inline;
+}
+.search
+{
+	overflow-y:scroll;
+}

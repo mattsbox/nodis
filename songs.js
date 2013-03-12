@@ -16,20 +16,16 @@ module.exports.get_listens=function(q,songtable,res)
 					},
 					{"limit":50,"sort":["_id","desc"]}
 					).toArray(function(e,a)
+					{
+						if(e){core.condemn(500,res);}
+						else
 						{
-							if(e){core.condemn(500,res);}
-							else
-							{
-								res.writeHead(200,{"Content-Type":"application/json"});
-								res.end(JSON.stringify(a));
-							}
-						});
-		console.log({"lat":{$lt:(lt+rt),
-							$gt:(lt-rt)},
-						"lon":{	$lt:(ln+rn),
-							$gt:(ln-rn)}});
+							res.writeHead(200,{"Content-Type":"application/json"});
+							res.end(JSON.stringify(a));
+						}
+					});
 		return true;
-	}else{return false;}
+	}else{core.condemn(400,res);return true;}
 }
 module.exports.new_listen=function(q,songtable,res)
 {
@@ -47,5 +43,23 @@ module.exports.new_listen=function(q,songtable,res)
 				});
 		return true;
 	}
-	else{return false;}
+	else{core.condemn(400,res);return true;}
+}
+module.exports.new_listen_raw=function(songtable,res,q)
+{
+	if(!songtable){console.log("DB");core.condemn(500,res);}
+	if(q["lat"]&&q["lon"]&&q["sid"])
+	{
+		q["lat"]=parseFloat(q["lat"]);
+		q["lon"]=parseFloat(q["lon"]);
+		songtable.insert(q,
+				{safe:true},
+				function(e,rs)
+				{
+					if(e){console.log(e);core.condemn(500,res);}
+					else{core.approve(res);}
+				});
+		return true;
+	}
+	else{core.condemn(400,res);}
 }

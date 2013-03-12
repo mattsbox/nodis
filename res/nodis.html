@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>nodis.me</title>
+		<link href="css/core.css" rel="stylesheet"/>
+		<link href="css/front.css" rel="stylesheet"/>
+		<link href="css/maps.css" rel="stylesheet"/>
+		<script src="js/jquery.js"></script>
+		<script type="text/javascript">
+			function scrollto(node)
+			{
+				return function()
+				{
+					$('html,body').animate({ scrollTop: $(node).offset().top }, { duration: 1000, easing: 'swing'});
+				};
+			}
+			$(window).resize(function()
+			{
+				$(".square").each(function()
+				{
+					$(this).width($(this).height());
+				});
+				$(".full, .tall").each(function()
+				{
+					$(this).height($(window).height());
+				});
+			});
+			$(document).ready(function()
+			{
+				$("#mapb").click(scrollto("#mapview"));
+			});
+		</script>
+		<script src="js/maps.js"></script>
+		<script src="js/youtube.js"></script>
+	</head>
+	<body>
+		<div class="full">
+			<div class="square" style="position:absolute;height:50%;top:25%;left:62%">
+				<img class="square front_button" src="img/mainpage/mpsearchicon.png"/>
+				<img class="square front_button" style="top:51%" src="img/mainpage/mpsoundicon.png"/>
+				<img class="square front_button" style="left:51%" src="img/mainpage/mpproficon.png"/>
+				<img id="mapb" class="square front_button" style="top:51%;left:51%" src="img/mainpage/mpmapicon.png"/>
+			</div>
+			<div style="position:absolute;left:10%;top:40%;width:40%;height:20%;">
+				<img class="square" style="position:static;display:inline;height:100%" src="img/mainpage/button.png"/>
+				<img style="position:static;height:100%" src="img/mainpage/title.png"/>
+			</div>
+		</div>
+		<div id="mapview" class="full">
+			<script type="text/javascript" src="js/mapux.js"></script>
+			<div class="tall" style="position:absolute;display:inline;width:33%;margin-left:0.2%">
+				<img class="map_button" style="height:30%;top:1.5%" src="img/mappage/mapbutton.png"/>
+				<img class="map_button" style="top:33%" src="img/mappage/genrebutton.png"/>
+				<img class="map_button" style="top:54%" src="img/mappage/locatebutton.png"/>
+				<img class="map_button" style="top:75%" src="img/mappage/nodisbutton.png"/>
+			</div>
+			<div id="spanel" class="tall map_panel" style="left:34%;width:0%">
+				<img id="spbicon" style="width:7%;right:1%;top:3%" src="img/mappage/backicon.png"/>
+				<h1>Search!</h1>
+				<input id="ytinput" type="text"/>
+				<button id="ytinputb">Search YouTube</button>
+				<div id="ytcontent"></div>
+			</div>
+			<img id="divider" class="tall map_panel" style="left:34%;width:2%" src="img/mappage/divider.png"/>
+			<div id="mappanel" class="tall map_panel" style="left:36%;width:64%">
+				<div id="map_canvas" style="position:absolute;background-color:#00FF00;height:90%;width:100%"></div>
+				<div style="position:absolute;background-color:#8ED8BC;height:10%;width:100%;top:90%">
+					<img id="mpsicon" style="width:7%;height:100%;right:3%" src="img/mappage/searchicon.png"/>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">$(document).ready(function(){$(window).resize();});</script>
+	</body>
+</html>

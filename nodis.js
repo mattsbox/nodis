@@ -4,6 +4,7 @@ var url=require("url");
 var core=require("./core.js");
 var collections=require("./mongo.js");
 var songs=require("./songs.js");
+var yt=require("./youtube.js");
 String.prototype.startsWith=function(s){return (this.indexOf(s)==0);}
 var server=http.createServer(function(req,res)
 {
@@ -21,6 +22,9 @@ var server=http.createServer(function(req,res)
 			break;
 			case "/new_listen":
 				if(!songs.new_listen(u.query,collections.songs,res)){core.condemn(500,res);}
+			break;
+			case "/new_listen_yt":
+				if(!yt.new_listen(u.query,collections.songs,res)){core.condemn(500,res);}
 			break;
 			case "/get_listens":
 				if(!songs.get_listens(u.query,collections.songs,res)){core.condemn(500,res);}

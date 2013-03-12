@@ -1,6 +1,8 @@
 (function()
 {
-	var lat=0,lon=0;
+	window.lat=0;
+	window.lon=0;
+	var markers=Array(),map;
 	function initialize_map()
 	{
 		var map_options = 
@@ -9,7 +11,12 @@
 			center: new google.maps.LatLng(lat,lon),
 			mapTypeId: google.maps.MapTypeId.ROADMAP
 		};
-		var map = new google.maps.Map(document.getElementById("map_canvas"), map_options);
+		map = new google.maps.Map(document.getElementById("map_canvas"), map_options);
+		map.bounds_changed=function()
+		{
+			var ne=map.getBounds().getNorthEast();
+			$.get("/get_listens?lat="+lat+"&lon="+lon+"&rlt="+(ne.lat()-lat)+"&rln="+(ne.lng()-lon),parse_nodes,"json");	
+		};
 	}
 	function load_script() 
 	{
@@ -17,6 +24,18 @@
 		script.type = "text/javascript";
 		script.src = "http://maps.googleapis.com/maps/api/js?key=AIzaSyAq0ZisrG4Uid-7__QbR72CxvoE88NC4G8&sensor=true&callback=initialize_loc";
 		document.body.appendChild(script);
+	}
+	function parse_nodes(data)
+	{
+		console.log(map);
+		for(node in data)
+		{
+			markers[node]=new google.maps.Marker({
+				map:map,
+				animation: google.maps.Animation.DROP,
+				position: new google.maps.LatLng(data[node].lat,data[node].lon)
+			});
+		}
 	}
 	window.initialize_loc=function()
 	{
