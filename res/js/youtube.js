@@ -4,7 +4,7 @@
 	function play(code,title)
 	{
 		console.log(window.lat);
-		$.get("/new_listen_yt?lat="+window.lat+"&lon="+window.lon+"&t="+title);
+		$.get("/new_listen_yt?lat="+window.lat+"&lon="+window.lon+"&t="+title+"&ytc="+code);
 		player = new YT.Player('player', 
 		{
 			//height: '390',

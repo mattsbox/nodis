@@ -5,6 +5,10 @@
 		<link href="css/core.css" rel="stylesheet"/>
 		<link href="css/front.css" rel="stylesheet"/>
 		<link href="css/maps.css" rel="stylesheet"/>
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
+		<!--[if lte IE 8]>
+			<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.ie.css" />
+		<![endif]-->
 		<script src="js/jquery.js"></script>
 		<script type="text/javascript">
 			function scrollto(node)
@@ -27,11 +31,12 @@
 			});
 			$(document).ready(function()
 			{
-				$("#mapb").click(scrollto("#mapview"));
+				$("#mapb").click(scrollto("#map_canvas"));
 			});
 		</script>
 		<script src="js/maps.js"></script>
 		<script src="js/youtube.js"></script>
+		<script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
 	</head>
 	<body>
 		<div class="full">
@@ -46,9 +51,10 @@
 				<img style="position:static;height:100%" src="img/mainpage/title.png"/>
 			</div>
 		</div>
-		<div id="mapview" class="full">
-			<script type="text/javascript" src="js/mapux.js"></script>
-			<div class="tall" style="position:absolute;display:inline;width:33%;margin-left:0.2%">
+		<script type="text/javascript" src="js/mapux.js"></script>
+		<!--<div id="mapview" class="full">-->
+		<div id="map_canvas" class="full">
+				<!--<div id="dispdiv" class="tall" style="position:absolute;display:inline;width:33%;margin-left:0.2%">
 				<img class="map_button" style="height:30%;top:1.5%" src="img/mappage/mapbutton.png"/>
 				<img class="map_button" style="top:33%" src="img/mappage/genrebutton.png"/>
 				<img class="map_button" style="top:54%" src="img/mappage/locatebutton.png"/>
@@ -67,7 +73,7 @@
 				<div style="position:absolute;background-color:#8ED8BC;height:10%;width:100%;top:90%">
 					<img id="mpsicon" style="width:7%;height:100%;right:3%" src="img/mappage/searchicon.png"/>
 				</div>
-			</div>
+			</div>-->
 		</div>
 		<script type="text/javascript">$(document).ready(function(){$(window).resize();});</script>
 	</body>

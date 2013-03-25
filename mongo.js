@@ -6,6 +6,8 @@ mongo.Db.connect(mURI,function(e,db)
 	{
 		db.collection("songs",function(e,c)
 		{
+			console.log("FOOPA");
+			console.log(e);
 			if(c){exports.songs=c;}
 		});
 		db.collection("emails",function(e,c)

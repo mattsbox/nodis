@@ -1,7 +1,7 @@
 var core=require("./core.js");
 module.exports.get_listens=function(q,songtable,res)
 {
-	if(!songtable){return false;}
+	if(!songtable){console.log("ad`");return false;}
 	if(q["lat"]&&q["lon"]&&q["rlt"]&&q["rln"])
 	{
 		var lt=parseFloat(q["lat"]);
@@ -17,7 +17,11 @@ module.exports.get_listens=function(q,songtable,res)
 					{"limit":50,"sort":["_id","desc"]}
 					).toArray(function(e,a)
 					{
-						if(e){core.condemn(500,res);}
+						if(e)
+						{
+							console.log(e);
+							core.condemn(500,res);
+						}
 						else
 						{
 							res.writeHead(200,{"Content-Type":"application/json"});
