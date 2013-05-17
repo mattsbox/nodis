@@ -1,4 +1,5 @@
 var http=require("http");
+var https=require("https");
 var fs=require("fs");
 var url=require("url");
 var core=require("./core.js");
@@ -6,6 +7,7 @@ var collections=require("./mongo.js");
 var songs=require("./songs.js");
 var yt=require("./youtube.js");
 var sk=require("./songkick.js");
+var index=require("./index.js");
 String.prototype.startsWith=function(s){return (this.indexOf(s)==0);}
 var server=http.createServer(function(req,res)
 {
@@ -19,7 +21,7 @@ var server=http.createServer(function(req,res)
 		switch(u.pathname)
 		{
 			case "/":
-				require("./index.js").serveIndex(req,res);
+				index.serveIndex(req,res);
 			break;
 			case "/new_listen":
 				if(!songs.new_listen(u.query,collections.songs,res)){core.condemn(500,res);}

@@ -1,2 +1,10 @@
 img{position:absolute}
-.full{width:100%;}
+.buffer{height:64px;}
+.playlist_node,.playlist_node img
+{
+	width:64px;
+}
+.content
+{
+	margin-left:64px;
+}

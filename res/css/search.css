@@ -1,0 +1,21 @@
+.search_row
+{
+	display:block;
+	font-size:1em;
+}
+#ytinput
+{
+	box-shadow: 0 0 1em blue;
+	-moz-box-shadow: 0 0 1em blue;
+	-webkit-box-shadow: 0 0 1em blue;
+	width:100%;
+}
+.playlist_button
+{
+	position:absolute;
+	width:10%;
+	height:5%;
+	left:5%;
+	top:5%;
+	font-size:1em;
+}

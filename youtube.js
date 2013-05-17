@@ -20,7 +20,7 @@ exports.new_listen=function(query,songdb,res)
 				if(list.results[i].kind=="song"){break;}
 			}
 			if(i==list.results.length){i=0;}
-			if(list.results[i].trackId)
+			if(list.results[i]&&list.results[i].trackId)
 			{
 				songs.new_listen_raw(songdb,res,{"lat":query.lat,"lon":query.lon,"sid":list.results[i].trackId,"title":query.t,"ytc":query.ytc});
 			}else{bail(songdb,res,query);}
