@@ -12,7 +12,8 @@
     	}],
   	"dependencies": {
 		"mongodb" : "1.1.11",
-		"mime" : "1.2.9"
+		"mime" : "1.2.9",
+		"maxmind" : "0.1.1"
  	},
   	"main": "getloud",
   	"engines": {
