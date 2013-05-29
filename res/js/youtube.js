@@ -138,7 +138,7 @@
 		}
 		else
 		{
-			$("#playlist button").before("<div style=\"position:absolute;bottom:64px;height:64px\" id=\"p0\" class=\"playlist_node\"><img src=\""+src+"\"></div>");
+			$("#playlist_play_button").before("<div style=\"position:absolute;bottom:64px;height:64px\" id=\"p0\" class=\"playlist_node\"><img src=\""+src+"\"></div>");
 		}
 	}
 	function parseyt(data)
@@ -210,7 +210,7 @@
 			this.value="";
 			$(this).off("focus");
 		});
-		$("#playlist button").click(function()
+		$("#playlist_play_button").click(function()
 		{
 			this.onclick=function(){};
 			play_next();
