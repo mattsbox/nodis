@@ -1,5 +1,5 @@
 var mongo=require("mongodb");
-var mURI=process.env.MONGOLAB_URI||process.env.MONGOHQ_URL||"mongodb://jimbo:slice@ds031587.mongolab.com:31587/nodis";
+var mURI=process.env.MONGOLAB_URI||process.env.MONGOHQ_URL;
 mongo.Db.connect(mURI,function(e,db)
 {
 	if(db)
